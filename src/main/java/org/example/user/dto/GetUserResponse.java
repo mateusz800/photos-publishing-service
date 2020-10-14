@@ -1,8 +1,10 @@
-package org.example.User.dto;
+package org.example.user.dto;
 
 import lombok.*;
-import org.example.User.entity.User;
+import org.example.user.entity.Gender;
+import org.example.user.entity.User;
 
+import java.time.LocalDate;
 import java.util.function.Function;
 
 @Getter
@@ -14,10 +16,15 @@ import java.util.function.Function;
 @EqualsAndHashCode
 public class GetUserResponse {
     private String name;
+    private LocalDate birthDate;
+    private Gender gender;
+
 
     public static Function<User, GetUserResponse> entityToDtoMapper() {
         return user -> GetUserResponse.builder()
                 .name(user.getName())
+                .birthDate(user.getBirthDate())
+                .gender(user.getGender())
                 .build();
     }
 

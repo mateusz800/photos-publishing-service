@@ -1,6 +1,6 @@
-package org.example.User.repository;
+package org.example.user.repository;
 
-import org.example.User.entity.User;
+import org.example.user.entity.User;
 import org.example.datestore.DateStore;
 import org.example.repository.Repository;
 import org.example.serialization.CloningUtility;
@@ -37,5 +37,10 @@ public class UserRepository implements Repository<User, Long> {
     @Override
     public void create(User entity) {
         store.createUser(entity);
+    }
+
+
+    public void update(User user) {
+        store.updateUser(user);
     }
 }

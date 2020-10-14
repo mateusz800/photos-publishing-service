@@ -1,8 +1,8 @@
-package org.example.User.dto;
+package org.example.user.dto;
 
 
 import lombok.*;
-import org.example.User.entity.User;
+import org.example.user.entity.User;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +27,7 @@ public class GetUsersResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @ToString
     @EqualsAndHashCode
-    public static class Userr {
+    public static class GetUsersRespoonse {
         private Long id;
         private String name;
     }
@@ -42,6 +42,8 @@ public class GetUsersResponse {
                     .map(user -> User.builder()
                             .id(user.getId())
                             .name(user.getName())
+                            .birthDate(user.getBirthDate())
+                            .gender(user.getGender())
                             .build())
                     .forEach(response::user);
             return response.build();

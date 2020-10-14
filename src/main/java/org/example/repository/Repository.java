@@ -1,6 +1,6 @@
 package org.example.repository;
 
-import org.example.User.entity.User;
+import org.example.user.entity.User;
 
 import java.util.List;
 import java.util.Optional;

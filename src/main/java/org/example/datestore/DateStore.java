@@ -1,7 +1,7 @@
 package org.example.datestore;
 
 import lombok.extern.java.Log;
-import org.example.User.entity.User;
+import org.example.user.entity.User;
 import org.example.serialization.CloningUtility;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -35,4 +35,16 @@ public class DateStore {
         return users.stream();
     }
 
+    public void updateUser(User user) {
+        findUser(user.getId()).ifPresentOrElse(
+                original -> {
+                    users.remove(original);
+                    users.add(user);
+                },
+                () -> {
+                    throw new IllegalArgumentException(
+                            String.format("The character with id \"%d\" does not exist", user.getId()));
+                });
+
+    }
 }

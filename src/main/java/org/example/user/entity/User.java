@@ -1,9 +1,10 @@
-package org.example.User.entity;
+package org.example.user.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,4 +16,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private Long id;
     private String name;
+    private Gender gender;
+    private LocalDate birthDate;
+    private byte[] avatar;
 }
