@@ -1,6 +1,6 @@
-package org.example.user.repository;
+package org.example.camera.repository;
 
-import org.example.user.entity.User;
+import org.example.camera.entity.Camera;
 import org.example.datestore.DateStore;
 import org.example.repository.Repository;
 import org.example.serialization.CloningUtility;
@@ -12,34 +12,29 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Dependent
-public class UserRepository implements Repository<User, Long> {
-
+public class CameraRepository implements Repository<Camera, Long> {
     private DateStore store;
 
     @Inject
-    public UserRepository(DateStore store){
+    public CameraRepository(DateStore store){
         this.store = store;
     }
 
     @Override
-    public Optional<User> find(Long id) {
-        return store.findUser(id);
+    public Optional<Camera> find(Long id) {
+       return store.findCamera(id);
     }
 
+
     @Override
-    public List<User> findAll() {
-        return store.getUserStream()
+    public List<Camera> findAll() {
+        return store.getCameraStream()
                 .map(CloningUtility::clone)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void create(User entity) {
-        store.createUser(entity);
-    }
-
-
-    public void update(User user) {
-        store.updateUser(user);
+    public void create(Camera camera) {
+        store.createCamera(camera);
     }
 }

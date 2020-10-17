@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
-@NoArgsConstructor//Empty constructor is required for creating proxy while CDI injection.
+@NoArgsConstructor
 public class UserService {
     private UserRepository repository;
 

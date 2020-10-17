@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:outputStylesheet library="camera" name="css/camera_list.css"/>
+        <h:panelGroup  layout="block">
+            <h2 class="center">Cameras</h2>
+            <h:dataTable value="#{cameraList.cameras.cameras}" var="camera" styleClass="data-table">
+                <h:column>
+                    <f:facet name="header">brand</f:facet>
+                    <h:outputText value="#{camera.brand}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">model</f:facet>
+                    <h:outputText value="#{camera.model}"/>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

@@ -1,4 +1,4 @@
-package org.example.user.dto;
+package org.example.user.models;
 
 import lombok.*;
 import org.example.user.entity.Gender;
@@ -14,17 +14,21 @@ import java.util.function.Function;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-public class GetUserResponse {
+public class UserModel {
+    private Long id;
     private String name;
     private LocalDate birthDate;
     private Gender gender;
+    private byte[] avatar;
 
 
-    public static Function<User, GetUserResponse> entityToDtoMapper() {
-        return user -> GetUserResponse.builder()
+    public static Function<User, UserModel> entityToModelMapper() {
+        return user -> UserModel.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .birthDate(user.getBirthDate())
                 .gender(user.getGender())
+                .avatar(user.getAvatar())
                 .build();
     }
 

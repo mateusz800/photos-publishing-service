@@ -30,7 +30,7 @@ public class AvatarServlet extends HttpServlet {
     }
 
     public static class Paths {
-        public static final String AVATAR = "/avatar";
+        public static final String AVATAR = "/api/avatar";
     }
 
     public static class Patterns {
@@ -141,8 +141,7 @@ public class AvatarServlet extends HttpServlet {
         }
     }
 
-    @SneakyThrows
-    private void changeAvatar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void changeAvatar(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Long id = Long.parseLong(ServletUtility.parseRequestPath(req).replaceAll("/", ""));
         Optional<User> user = service.find(id);
         if (user.isPresent()) {

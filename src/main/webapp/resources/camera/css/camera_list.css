@@ -1,0 +1,14 @@
+.data-table{
+    margin:auto;
+}
+.data-table td{
+    border-bottom:1px solid #565656;
+    border-left:1px solid #565656;
+    padding:1px 5px;
+}
+.data-table td:first-of-type{
+    border-left:none;
+}
+.data-table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}

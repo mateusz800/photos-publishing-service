@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{userView.id}" required="true"/>
+        <f:viewAction action="#{userView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="user" name="css/user_view.css"/><!-- Automatically relocated to head. -->
+        <h:panelGroup  layout="block">
+            <h:panelGroup styleClass="avatar">
+                <h:graphicImage value="/api/avatar/#{userView.user.id}" rendered="#{not empty userView.user.avatar}" alt="#{userView.user.name}"/>
+                <h:graphicImage library="default" name="icons/default_avatar.svg" rendered="#{empty userView.user.avatar}" alt="#{userView.user.name}"/>
+            </h:panelGroup>
+            <h2 class="center">
+                <h:outputText value="#{userView.user.name}"/>
+            </h2>
+
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

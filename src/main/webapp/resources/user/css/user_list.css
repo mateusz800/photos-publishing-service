@@ -1,0 +1,20 @@
+.name{
+    margin-left:10px;
+    font-weight:bold;
+    font-size:20px;
+}
+.data-table{
+    margin:auto;
+}
+.data-table td a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:30px;
+}
+.data-table tr img{
+    width:75px;
+}
+.data-table tbody{
+    display:flex;
+}

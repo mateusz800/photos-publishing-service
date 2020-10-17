@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:outputStylesheet library="user" name="css/user_list.css"/>
+        <h:panelGroup  layout="block">
+                <h2 class="center">Users</h2>
+            <h:dataTable value="#{userList.users.users}" var="user" styleClass="data-table">
+                <h:column>
+                    <h:link outcome="/user/user_view.xhtml">
+                        <f:param name="id" value="#{user.id}"/>
+                        <h:graphicImage value="/api/avatar/#{user.id}" rendered="#{not empty user.avatar}" alt="#{user.name}"/>
+                        <h:graphicImage library="default" name="icons/default_avatar.svg" rendered="#{empty user.avatar}" alt="#{user.name}"/>
+                        <h:outputText value="#{user.name}" styleClass="name"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
