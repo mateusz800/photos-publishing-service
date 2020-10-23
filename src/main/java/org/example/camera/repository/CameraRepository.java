@@ -37,4 +37,16 @@ public class CameraRepository implements Repository<Camera, Long> {
     public void create(Camera camera) {
         store.createCamera(camera);
     }
+
+    @Override
+    public void update(Camera entity) {
+        store.updateCamera(entity);
+    }
+
+
+
+    @Override
+    public void delete(Long id) {
+        store.deleteCamera(id);
+    }
 }

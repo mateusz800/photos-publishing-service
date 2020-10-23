@@ -1,0 +1,6 @@
+img.miniature{
+    max-width:300px;
+}
+.data-table tbody{
+    display:flex;
+}

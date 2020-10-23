@@ -18,6 +18,22 @@
                     <f:facet name="header">model</f:facet>
                     <h:outputText value="#{camera.model}"/>
                 </h:column>
+                <h:column>
+                    <f:facet name="header">details view</f:facet>
+                    <h:link outcome="/camera/camera_view.xhtml">
+                        <f:param name="id" value="#{camera.id}"/>
+                        <h:outputText value="view"/>
+                    </h:link>
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header">delete</f:facet>
+                    <h:form>
+                        <h:commandButton  value="delete"
+                                         action="#{cameraList.deleteAction(camera)}"/>
+                    </h:form>
+                </h:column>
+
             </h:dataTable>
         </h:panelGroup>
     </ui:define>

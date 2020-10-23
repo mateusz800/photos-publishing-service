@@ -8,3 +8,14 @@
     display:flex;
     justify-content:center;
 }
+.photos-table tbody{
+    display:flex;
+}
+.photos-table img{
+    max-width:300px;
+}
+.photos-table .miniature{
+    width:200px;
+    height:200px;
+
+}

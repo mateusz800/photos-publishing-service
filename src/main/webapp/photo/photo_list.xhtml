@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:outputStylesheet library="photo" name="css/photo_list.css"/>
+        <h:panelGroup  layout="block">
+            <h2 class="center">Photos</h2>
+            <h:link outcome="/photo/photo_add.xhtml">
+                <h:outputText value="Add"/>
+            </h:link>
+            <h:dataTable value="#{photoList.photos.photos}" var="photo" styleClass="data-table">
+                <h:column>
+                    <h:link outcome="/photo/photo_view.xhtml">
+                        <f:param name="id" value="#{photo.id}"/>
+                        <h:graphicImage value="/api/photo/#{photo.id}" alt="#{photo.title}" styleClass="miniature"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

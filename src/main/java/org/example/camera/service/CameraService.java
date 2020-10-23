@@ -3,8 +3,6 @@ package org.example.camera.service;
 import lombok.NoArgsConstructor;
 import org.example.camera.entity.Camera;
 import org.example.camera.repository.CameraRepository;
-import org.example.user.entity.User;
-import org.example.user.repository.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,5 +29,9 @@ public class CameraService {
 
     public List<Camera> findAll() {
         return repository.findAll();
+    }
+
+    public void delete(Long id) {
+        repository.delete(id);
     }
 }

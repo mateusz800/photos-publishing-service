@@ -21,6 +21,15 @@
                 <h:outputText value="#{userView.user.name}"/>
             </h2>
 
+            <h:dataTable value="#{userView.photos.photos}" var="photo" styleClass="photos-table">
+                <h:column>
+                    <h:link outcome="/photo/photo_view.xhtml">
+                            <f:param name="id" value="#{photo.id}"/>
+                            <h:graphicImage value="/api/photo/#{photo.id}" alt="#{photo.title}" styleClass="photo"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+
         </h:panelGroup>
     </ui:define>
 

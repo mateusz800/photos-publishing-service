@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Dependent
 public class UserRepository implements Repository<User, Long> {
 
-    private DateStore store;
+    private final DateStore store;
 
     @Inject
     public UserRepository(DateStore store){
@@ -42,4 +42,11 @@ public class UserRepository implements Repository<User, Long> {
     public void update(User user) {
         store.updateUser(user);
     }
+
+    @Override
+    public void delete(Long id) {
+        // TODO: delete user
+    }
+
+
 }

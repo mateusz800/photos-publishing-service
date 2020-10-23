@@ -25,4 +25,8 @@ public class CameraList implements Serializable {
         }
         return cameras;
     }
+
+    public void deleteAction(CamerasModel.Camera camera){
+        service.delete(camera.getId());
+    }
 }

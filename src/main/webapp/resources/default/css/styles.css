@@ -9,6 +9,8 @@ a, a h1{
 .main-section{
     margin-top:75px !important;
     margin-bottom:100px !important;
+    min-height:calc(100vh - 275px);
+
 }
 .main-section, header div{
     width:100%;

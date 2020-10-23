@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:outputStylesheet library="photo" name="css/photo_list.css"/>
+        <h:panelGroup layout="block">
+            <h2 class="center">Photos</h2>
+            <h:form id="photoAddForm" class="photo__form" enctype="multipart/form-data" >
+                <h:outputLabel for="title" value="Title:"/>
+                <h:inputText class="ui-control ui-input" id="title" value="#{title}"/>
+                <h:outputLabel for="description" value="Description:"/>
+                <h:inputTextarea class="ui-control ui-input" id="description" value="#{description}"/>
+                <h:outputLabel for="image" value="File:"/>
+                <h:inputFile class="ui-control ui-button" id="image" value="#{image}"/>
+                <h:outputLabel for="author" value="Author:"/>
+                <h:selectOneMenu value="#{photoAdd.photo.author}" id="author">
+                    <f:selectItems var="user" value="#{photoAdd.users}" itemValue="#{user.id}"
+                                   itemLabel="#{user.name}" itemLabelEscaped="false"/>
+                </h:selectOneMenu>
+                <h:selectOneMenu value="#{photoAdd.photo.camera}" id="camera">
+                    <f:selectItems var="camera" value="#{photoAdd.cameras}" itemValue="#{camera.id}"
+                                   itemLabel="#{camera.brand} #{camera.model}" itemLabelEscaped="false"/>
+                </h:selectOneMenu>
+
+                <h:commandButton class="ui-control ui-button" value="Save" immediate="true"
+                                 action="#{photoAdd.saveAction()}">
+                </h:commandButton>
+
+            </h:form>
+
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

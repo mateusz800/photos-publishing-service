@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{photoEdit.id}" required="true"/>
+        <f:viewAction action="#{photoEdit.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="photo" name="css/photo_edit.css"/><!-- Automatically relocated to head. -->
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <h:form if="editPhotoForm" class="photo__form">
+                    <div>
+                    <h:outputLabel for="title" value="Title:"/>
+                        <br/>
+                    <h:inputText class="ui-control ui-input" id="title" value="#{photoEdit.photo.title}"/>
+                    </div>
+                    <div>
+                        <h:outputLabel for="desc" value="Description:"/>
+                        <br/>
+                        <h:inputTextarea id="desc" value="#{photoEdit.photo.description}"/>
+                    </div>
+                    <!--
+                    <h:selectOneMenu value="#{photoEdit.photo.camera}" id="camera">
+                        <f:selectItems var="camera" value="#{photoEdit.cameras}" itemValue="#{camera.id}"
+                                       itemLabel="#{camera.brand} #{camera.model}" itemLabelEscaped="false"/>
+                    </h:selectOneMenu>
+                    -->
+                    <br/><br/>
+                    <h:commandButton class="ui-control ui-button" value="Update"
+                                     action="#{photoEdit.saveAction()}"/>
+                </h:form>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

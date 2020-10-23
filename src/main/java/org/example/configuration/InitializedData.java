@@ -3,6 +3,8 @@ package org.example.configuration;
 import lombok.SneakyThrows;
 import org.example.camera.entity.Brand;
 import org.example.camera.entity.Camera;
+import org.example.photo.entity.Photo;
+import org.example.photo.service.PhotoService;
 import org.example.user.entity.Gender;
 import org.example.user.entity.User;
 import org.example.user.service.UserService;
@@ -24,11 +26,13 @@ public class InitializedData {
 
     private final UserService userService;
     private final CameraService cameraService;
+    private final PhotoService photoService;
 
     @Inject
-    public InitializedData( UserService userService, CameraService cameraService) {
+    public InitializedData( UserService userService, CameraService cameraService, PhotoService photoService) {
         this.userService = userService;
         this.cameraService = cameraService;
+        this.photoService = photoService;
     }
 
     public void contextInitialized(@Observes @Initialized(ApplicationScoped.class) Object init) {
@@ -36,21 +40,6 @@ public class InitializedData {
     }
 
     private synchronized void init() {
-        initCameras();
-        initUsers();
-
-    }
-
-    @SneakyThrows
-    private byte[] getResourceAsByteArray(String name) {
-        URL resource = getClass().getClassLoader().getResource(name);
-        Path path = Paths.get(resource.getPath());
-        byte[] bytes = Files.readAllBytes(path);
-        return bytes;
-
-    }
-
-    private void initUsers(){
         User user1 = User.builder()
                 .id((long) 1)
                 .name("Adam")
@@ -84,22 +73,58 @@ public class InitializedData {
         userService.create(user2);
         userService.create(user3);
         userService.create(user4);
-    }
 
-    private void initCameras(){
         Camera camera1 = Camera.builder()
-                .id((long) 1)
+                .id((long) 5)
                 .brand(Brand.CANON)
                 .model("EOS R6")
                 .build();
         Camera camera2 = Camera.builder()
-                .id((long) 2)
+                .id((long) 6)
                 .brand(Brand.NIKON)
                 .model("test")
                 .build();
 
         cameraService.create(camera1);
         cameraService.create(camera2);
+
+        Photo photo1 = Photo.builder()
+                .id((long)7)
+                .title("Sample photo 1")
+                .description("some description")
+                .image(getResourceAsByteArray("photos/photo1.jpg"))
+                .author(user1)
+                .camera(camera1)
+                .build();
+        Photo photo2 = Photo.builder()
+                .id((long)8)
+                .title("Sample photo 2")
+                .image(getResourceAsByteArray("photos/photo2.jpg"))
+                .author(user1)
+                .camera(camera1)
+                .build();
+        Photo photo3 = Photo.builder()
+                .id((long)9)
+                .title("Sample photo 3")
+                .description("description")
+                .image(getResourceAsByteArray("photos/photo3.jpg"))
+                .author(user3)
+                .camera(camera2)
+                .build();
+
+        photoService.create(photo1);
+        photoService.create(photo2);
+        photoService.create(photo3);
+
+    }
+
+    @SneakyThrows
+    private byte[] getResourceAsByteArray(String name) {
+        URL resource = getClass().getClassLoader().getResource(name);
+        Path path = Paths.get(resource.getPath());
+        byte[] bytes = Files.readAllBytes(path);
+        return bytes;
+
     }
 
 }
