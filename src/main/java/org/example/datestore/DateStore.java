@@ -34,7 +34,7 @@ public class DateStore {
                     throw new IllegalArgumentException(
                             String.format("The user id \"%s\" is not unique", user.getId()));
                 },
-            () -> users.add(user));
+                () -> users.add(user));
     }
 
     public Stream<User> getUserStream() {
@@ -56,7 +56,7 @@ public class DateStore {
 
     public synchronized Optional<Camera> findCamera(Long id) {
         return cameras.stream()
-                .filter(user -> user.getId().equals(id))
+                .filter(camera -> camera.getId().equals(id))
                 .findFirst()
                 .map(CloningUtility::clone);
     }
@@ -66,12 +66,17 @@ public class DateStore {
     }
 
     public void createCamera(Camera camera) {
-        findUser(camera.getId()).ifPresentOrElse(
-                original -> {
-                    throw new IllegalArgumentException(
-                            String.format("The camera id \"%s\" is not unique", camera.getId()));
-                },
-                () -> cameras.add(camera));
+        if (camera.getId() != null) {
+            findCamera(camera.getId()).ifPresent(
+                    original -> {
+                        throw new IllegalArgumentException(
+                                String.format("The camera id \"%s\" is not unique", camera.getId()));
+                    }
+            );
+        }else {
+            camera.setId(generateCameraId());
+        }
+        cameras.add(camera);
     }
 
     public Optional<Photo> findPhoto(Long id) {
@@ -86,7 +91,7 @@ public class DateStore {
     }
 
     public void createPhoto(Photo photo) {
-        photo.setId(getNextPhotoId());
+        photo.setId(generatePhotoId());
         photos.add(photo);
     }
 
@@ -103,14 +108,16 @@ public class DateStore {
     }
 
     public void updateCamera(Camera camera) {
-        findPhoto(camera.getId()).ifPresentOrElse(
+        System.out.println(camera.getId());
+
+        findCamera(camera.getId()).ifPresentOrElse(
                 original -> {
                     cameras.remove(original);
                     cameras.add(camera);
                 },
                 () -> {
                     throw new IllegalArgumentException(
-                            String.format("The camera with id \"%d\" does not exist", camera.getId()));
+                            String.format("The camera does not exist", camera.getId()));
                 });
     }
 
@@ -124,11 +131,11 @@ public class DateStore {
         deletePhotosTakenByCamera(id);
     }
 
-    private void deletePhotosTakenByCamera(Long id){
-        List<Photo> cameraPhotos =  photos.stream()
+    private void deletePhotosTakenByCamera(Long id) {
+        List<Photo> cameraPhotos = photos.stream()
                 .filter(photo -> photo.getCamera().getId().equals(id))
                 .collect(Collectors.toList());
-        for(Photo photo:cameraPhotos){
+        for (Photo photo : cameraPhotos) {
             photos.remove(photo);
         }
     }
@@ -142,9 +149,16 @@ public class DateStore {
                 });
     }
 
-    private Long getNextPhotoId(){
+
+    private Long generatePhotoId() {
         return photos.stream()
                 .mapToLong(Photo::getId)
-                .max().orElse(0)+1;
+                .max().orElse(0) + 1;
+    }
+
+    private Long generateCameraId() {
+        return cameras.stream()
+                .mapToLong(Camera::getId)
+                .max().orElse(0) + 1;
     }
 }

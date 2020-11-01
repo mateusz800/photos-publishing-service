@@ -19,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 
 @ApplicationScoped
@@ -45,21 +47,21 @@ public class InitializedData {
                 .name("Adam")
                 .birthDate(LocalDate.of(1996,12,5))
                 .gender(Gender.MALE)
-                .avatar(getResourceAsByteArray("avatars/avatar4.png"))
+                //.avatar(getResourceAsByteArray("avatars/avatar4.png"))
                 .build();
         User user2 = User.builder()
                 .id((long) 2)
                 .name("Mateusz")
                 .gender(Gender.MALE)
                 .birthDate((LocalDate.of(1986,4,28)))
-                .avatar(getResourceAsByteArray("avatars/avatar3.png"))
+                //.avatar(getResourceAsByteArray("avatars/avatar3.png"))
                 .build();
         User user4 = User.builder()
                 .id((long) 3)
                 .name("Agata")
                 .birthDate((LocalDate.of(1993,6,13)))
                 .gender(Gender.FEMALE)
-                .avatar(getResourceAsByteArray("avatars/avatar2.png"))
+                //.avatar(getResourceAsByteArray("avatars/avatar2.png"))
                 .build();
         User user3 = User.builder()
                 .id((long) 4)
@@ -78,11 +80,13 @@ public class InitializedData {
                 .id((long) 5)
                 .brand(Brand.CANON)
                 .model("EOS R6")
+                .mpix(16f)
                 .build();
         Camera camera2 = Camera.builder()
                 .id((long) 6)
                 .brand(Brand.NIKON)
                 .model("test")
+                .mpix(23f)
                 .build();
 
         cameraService.create(camera1);
@@ -95,6 +99,7 @@ public class InitializedData {
                 .image(getResourceAsByteArray("photos/photo1.jpg"))
                 .author(user1)
                 .camera(camera1)
+                .creationDate(LocalDate.now())
                 .build();
         Photo photo2 = Photo.builder()
                 .id((long)8)
@@ -110,6 +115,7 @@ public class InitializedData {
                 .image(getResourceAsByteArray("photos/photo3.jpg"))
                 .author(user3)
                 .camera(camera2)
+                .creationDate(LocalDate.now())
                 .build();
 
         photoService.create(photo1);

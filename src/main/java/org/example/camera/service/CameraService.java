@@ -34,4 +34,8 @@ public class CameraService {
     public void delete(Long id) {
         repository.delete(id);
     }
+
+    public void update(Camera camera){
+        repository.update(camera);
+    }
 }

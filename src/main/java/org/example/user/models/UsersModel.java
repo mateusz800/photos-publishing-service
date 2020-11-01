@@ -28,7 +28,7 @@ public class UsersModel {
                             .name(user.getName())
                             .birthDate(user.getBirthDate())
                             .gender(user.getGender())
-                            .avatar(user.getAvatar())
+                            //.avatar(user.getAvatar())
                             .build())
                     .forEach(response::user);
             return response.build();

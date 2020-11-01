@@ -16,4 +16,5 @@ public class Camera implements Serializable {
     private Long id;
     private Brand brand;
     private String model;
+    private Float mpix;
 }
