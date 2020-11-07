@@ -30,6 +30,10 @@
                 </div>
 
             </div>
+            <div>
+                Liczba Megapikseli:
+                <h:outputText value="#{cameraView.camera.mpix}"/>
+            </div>
             <section>
                 <h3>Photos</h3>
                 <h:dataTable value="#{cameraView.photos.photos}" var="photo" styleClass="photos-table">

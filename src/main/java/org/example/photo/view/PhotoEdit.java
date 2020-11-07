@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Named
 public class PhotoEdit  implements Serializable {
     private final PhotoService service;
-    private CameraService cameraService;
+    private final CameraService cameraService;
 
     @Getter
     @Setter

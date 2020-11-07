@@ -5,9 +5,7 @@ import org.example.camera.dto.AddCameraRequest;
 import org.example.camera.dto.GetCameraResponse;
 import org.example.camera.dto.GetCamerasResponse;
 import org.example.camera.dto.UpdateCameraRequest;
-import org.example.camera.entity.Brand;
 import org.example.camera.entity.Camera;
-import org.example.camera.model.CameraModel;
 import org.example.camera.service.CameraService;
 
 import javax.inject.Inject;
@@ -15,7 +13,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
-import java.util.SortedMap;
 
 @Path("/cameras")
 @NoArgsConstructor
@@ -49,10 +46,6 @@ public class CameraController {
         service.create(camera);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
-
-
-
-
 
     @DELETE
     @Path("{id}")

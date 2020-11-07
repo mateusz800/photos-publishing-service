@@ -22,8 +22,8 @@ import java.util.Optional;
 @ViewScoped
 @Named
 public class CameraView implements Serializable {
-    private CameraService service;
-    private PhotoService photoService;
+    private final CameraService service;
+    private final PhotoService photoService;
 
     @Getter
     @Setter

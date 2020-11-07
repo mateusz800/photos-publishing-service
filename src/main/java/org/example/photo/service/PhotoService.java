@@ -6,6 +6,7 @@ import org.example.photo.repository.PhotoRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ public class PhotoService {
         return repository.find(id);
     }
 
+    @Transactional
     public void create(Photo photo) {
         repository.create(photo);
     }
@@ -35,10 +37,12 @@ public class PhotoService {
         return repository.findUserPhotos(userId);
     }
 
+    @Transactional
     public void update(Photo photo) {
         repository.update(photo);
     }
 
+    @Transactional
     public void delete(Long id) {
         repository.delete(id);
     }

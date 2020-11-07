@@ -10,7 +10,7 @@ import javax.inject.Named;
 @RequestScoped
 @Named
 public class PhotoList {
-    private PhotoService service;
+    private final PhotoService service;
     private PhotosModel photos;
 
     @Inject

@@ -13,13 +13,12 @@ import org.example.user.entity.User;
 import org.example.user.service.UserService;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
-@Path("/photos")
+@Path("cameras/{cameraId}/photos")
 @NoArgsConstructor
 public class PhotoController {
     @Inject
@@ -33,8 +32,8 @@ public class PhotoController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPhotos(){
-        return Response.ok(GetPhotosResponse.entityToDtoMapper().apply(service.findAll()).getPhotos()).build();
+    public Response getPhotos(@PathParam("cameraId") Long cameraId){
+        return Response.ok(GetPhotosResponse.entityToDtoMapper().apply(service.findCameraPhotos(cameraId)).getPhotos()).build();
     }
 
     @GET
@@ -52,10 +51,10 @@ public class PhotoController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addPhoto(AddPhotoRequest request){
+    public Response addPhoto(AddPhotoRequest request, @PathParam("cameraId") Long cameraId){
         Photo photo = AddPhotoRequest.mapToEntity(request);
         if(request.getCameraId() != null){
-            Optional<Camera> camera = cameraService.find(request.getCameraId());
+            Optional<Camera> camera = cameraService.find(cameraId);
             if(camera.isPresent()){
                 photo.setCamera(camera.get());
             }

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @FacesConverter(forClass = UserModel.class, managed = true)
 public class UserConverter implements Converter<UserModel> {
-    private UserService service;
+    private final UserService service;
 
     @Inject
     public UserConverter(UserService service){

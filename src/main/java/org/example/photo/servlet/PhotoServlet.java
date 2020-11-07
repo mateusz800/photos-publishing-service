@@ -21,7 +21,7 @@ import java.util.Optional;
         PhotoServlet.Paths.PHOTO + "/*",
 })
 public class PhotoServlet extends HttpServlet {
-    private PhotoService service;
+    private final PhotoService service;
 
     private final Jsonb jsonb = JsonbBuilder.create();
 

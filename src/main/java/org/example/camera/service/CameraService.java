@@ -6,6 +6,7 @@ import org.example.camera.repository.CameraRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class CameraService {
     public Optional<Camera> find(Long id) {
         return repository.find(id);
     }
-
+    @Transactional
     public void create(Camera camera) {
         repository.create(camera);
     }
@@ -31,10 +32,12 @@ public class CameraService {
         return repository.findAll();
     }
 
+    @Transactional
     public void delete(Long id) {
         repository.delete(id);
     }
 
+    @Transactional
     public void update(Camera camera){
         repository.update(camera);
     }

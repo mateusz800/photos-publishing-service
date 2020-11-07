@@ -11,7 +11,7 @@ import java.io.Serializable;
 @RequestScoped
 @Named
 public class CameraList implements Serializable {
-    private CameraService service;
+    private final CameraService service;
     private CamerasModel cameras;
 
     @Inject

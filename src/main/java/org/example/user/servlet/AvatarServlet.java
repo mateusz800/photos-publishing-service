@@ -22,7 +22,7 @@ import java.util.Optional;
 })
 @MultipartConfig(maxFileSize = 200 * 1024)
 public class AvatarServlet extends HttpServlet {
-    private UserService service;
+    private final UserService service;
 
     @Inject
     public AvatarServlet(UserService service) {

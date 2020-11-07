@@ -1,52 +1,47 @@
 package org.example.camera.repository;
 
 import org.example.camera.entity.Camera;
-import org.example.datestore.DateStore;
 import org.example.repository.Repository;
-import org.example.serialization.CloningUtility;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-@Dependent
+@RequestScoped
 public class CameraRepository implements Repository<Camera, Long> {
-    private DateStore store;
+    private EntityManager entityManager;
 
-    @Inject
-    public CameraRepository(DateStore store){
-        this.store = store;
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
+
 
     @Override
     public Optional<Camera> find(Long id) {
-       return store.findCamera(id);
+       return Optional.ofNullable(entityManager.find(Camera.class, id));
     }
 
 
     @Override
     public List<Camera> findAll() {
-        return store.getCameraStream()
-                .map(CloningUtility::clone)
-                .collect(Collectors.toList());
+        return entityManager.createQuery("select c from Camera c", Camera.class).getResultList();
     }
 
     @Override
     public void create(Camera camera) {
-        store.createCamera(camera);
+        entityManager.persist(camera);
     }
 
     @Override
     public void update(Camera entity) {
-        store.updateCamera(entity);
+        entityManager.merge(entity);
     }
-
-
 
     @Override
     public void delete(Long id) {
-        store.deleteCamera(id);
+        entityManager.remove(entityManager.find(Camera.class, id));
     }
 }

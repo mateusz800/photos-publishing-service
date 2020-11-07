@@ -1,4 +1,4 @@
-package org.example.datestore;
+package org.example.datastore;
 
 import lombok.extern.java.Log;
 import org.example.camera.entity.Camera;
@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 
 @Log
 @ApplicationScoped
-public class DateStore {
-    private Set<User> users = new HashSet<>();
-    private Set<Camera> cameras = new HashSet<>();
-    private Set<Photo> photos = new HashSet<>();
+public class DataStore {
+    private final Set<User> users = new HashSet<>();
+    private final Set<Camera> cameras = new HashSet<>();
+    private final Set<Photo> photos = new HashSet<>();
 
     public synchronized Optional<User> findUser(Long id) {
         return users.stream()
@@ -108,8 +108,6 @@ public class DateStore {
     }
 
     public void updateCamera(Camera camera) {
-        System.out.println(camera.getId());
-
         findCamera(camera.getId()).ifPresentOrElse(
                 original -> {
                     cameras.remove(original);

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @RequestScoped
 @Named
 public class UserList implements Serializable {
-    private UserService service;
+    private final UserService service;
     private UsersModel users;
 
     @Inject

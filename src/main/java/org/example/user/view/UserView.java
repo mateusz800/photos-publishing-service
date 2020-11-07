@@ -22,8 +22,8 @@ import java.util.Optional;
 @RequestScoped
 @Named
 public class UserView implements Serializable {
-    private UserService userService;
-    private PhotoService photoService;
+    private final UserService userService;
+    private final PhotoService photoService;
 
     @Getter
     @Setter

@@ -17,12 +17,14 @@ public class CameraModel {
     private Long id;
     private Brand brand;
     private String model;
+    private float mpix;
 
     public static Function<Camera, CameraModel> entityToModelMapper() {
         return camera -> CameraModel.builder()
                 .id(camera.getId())
                 .brand(camera.getBrand())
                 .model(camera.getModel())
+                .mpix(camera.getMpix())
                 .build();
     }
     public static CameraModel convertFromEntity(Camera entity){
@@ -30,6 +32,7 @@ public class CameraModel {
                 .id(entity.getId())
                 .brand(entity.getBrand())
                 .model(entity.getModel())
+                .mpix(entity.getMpix())
                 .build();
     }
 }

@@ -21,7 +21,7 @@ import java.util.Optional;
         UserServlet.Paths.USER + "/*",
 })
 public class UserServlet extends HttpServlet {
-    private UserService userService;
+    private final UserService userService;
 
     public static class Paths {
         public static final String USER = "/api/user";

@@ -1,16 +1,11 @@
 package org.example.photo.dto;
 
 import lombok.*;
-import org.example.camera.dto.AddCameraRequest;
-import org.example.camera.entity.Camera;
 import org.example.camera.service.CameraService;
 import org.example.photo.entity.Photo;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.Optional;
-import java.util.function.BiFunction;
 
 @Getter
 @Setter

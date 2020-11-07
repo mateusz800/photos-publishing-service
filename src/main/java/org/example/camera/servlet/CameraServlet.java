@@ -19,7 +19,7 @@ import java.io.IOException;
         CameraServlet.Paths.CAMERA + "/*",
 })
 public class CameraServlet extends HttpServlet {
-    private CameraService cameraService;
+    private final CameraService cameraService;
 
     public static class Paths {
         public static final String CAMERA = "/api/camera";

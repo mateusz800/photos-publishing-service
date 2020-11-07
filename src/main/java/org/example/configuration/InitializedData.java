@@ -12,6 +12,7 @@ import org.example.camera.service.CameraService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
+import javax.enterprise.context.control.RequestContextController;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.net.URL;
@@ -19,8 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 
 @ApplicationScoped
@@ -29,12 +28,15 @@ public class InitializedData {
     private final UserService userService;
     private final CameraService cameraService;
     private final PhotoService photoService;
+    private final RequestContextController requestContextController;
 
     @Inject
-    public InitializedData( UserService userService, CameraService cameraService, PhotoService photoService) {
+    public InitializedData(UserService userService, CameraService cameraService, PhotoService photoService,
+                           RequestContextController requestContextController) {
         this.userService = userService;
         this.cameraService = cameraService;
         this.photoService = photoService;
+        this.requestContextController = requestContextController;
     }
 
     public void contextInitialized(@Observes @Initialized(ApplicationScoped.class) Object init) {
@@ -42,10 +44,11 @@ public class InitializedData {
     }
 
     private synchronized void init() {
+        requestContextController.activate();
         User user1 = User.builder()
                 .id((long) 1)
                 .name("Adam")
-                .birthDate(LocalDate.of(1996,12,5))
+                .birthDate(LocalDate.of(1996, 12, 5))
                 .gender(Gender.MALE)
                 //.avatar(getResourceAsByteArray("avatars/avatar4.png"))
                 .build();
@@ -53,22 +56,22 @@ public class InitializedData {
                 .id((long) 2)
                 .name("Mateusz")
                 .gender(Gender.MALE)
-                .birthDate((LocalDate.of(1986,4,28)))
-                //.avatar(getResourceAsByteArray("avatars/avatar3.png"))
+                .birthDate((LocalDate.of(1986, 4, 28)))
+                .avatar(getResourceAsByteArray("avatars/avatar3.png"))
                 .build();
         User user4 = User.builder()
                 .id((long) 3)
                 .name("Agata")
-                .birthDate((LocalDate.of(1993,6,13)))
+                .birthDate((LocalDate.of(1993, 6, 13)))
                 .gender(Gender.FEMALE)
-                //.avatar(getResourceAsByteArray("avatars/avatar2.png"))
+                .avatar(getResourceAsByteArray("avatars/avatar2.png"))
                 .build();
         User user3 = User.builder()
                 .id((long) 4)
                 .name("Ania")
-                .birthDate((LocalDate.of(1999,10,2)))
+                .birthDate((LocalDate.of(1999, 10, 2)))
                 .gender(Gender.FEMALE)
-                //.avatar(getResourceAsByteArray("avatars/avatar1.png"))
+                .avatar(getResourceAsByteArray("avatars/avatar1.png"))
                 .build();
 
         userService.create(user1);
@@ -93,7 +96,7 @@ public class InitializedData {
         cameraService.create(camera2);
 
         Photo photo1 = Photo.builder()
-                .id((long)7)
+                .id((long) 7)
                 .title("Sample photo 1")
                 .description("some description")
                 .image(getResourceAsByteArray("photos/photo1.jpg"))
@@ -102,14 +105,14 @@ public class InitializedData {
                 .creationDate(LocalDate.now())
                 .build();
         Photo photo2 = Photo.builder()
-                .id((long)8)
+                .id((long) 8)
                 .title("Sample photo 2")
                 .image(getResourceAsByteArray("photos/photo2.jpg"))
                 .author(user1)
                 .camera(camera1)
                 .build();
         Photo photo3 = Photo.builder()
-                .id((long)9)
+                .id((long) 9)
                 .title("Sample photo 3")
                 .description("description")
                 .image(getResourceAsByteArray("photos/photo3.jpg"))
@@ -122,6 +125,7 @@ public class InitializedData {
         photoService.create(photo2);
         photoService.create(photo3);
 
+        requestContextController.deactivate();
     }
 
     @SneakyThrows

@@ -25,9 +25,9 @@ import java.util.stream.Collectors;
 @ConversationScoped
 @Named
 public class PhotoAdd implements Serializable {
-    private PhotoService service;
-    private UserService userService;
-    private CameraService cameraService;
+    private final PhotoService service;
+    private final UserService userService;
+    private final CameraService cameraService;
 
     @Getter
     @Setter
@@ -53,7 +53,7 @@ public class PhotoAdd implements Serializable {
     private List<CameraModel> cameras;
 
 
-    private Conversation conversation;
+    private final Conversation conversation;
 
     @Inject
     public PhotoAdd(PhotoService photoService, UserService userService,CameraService cameraService, Conversation conversation) {
@@ -85,7 +85,6 @@ public class PhotoAdd implements Serializable {
         //photo.setImage(request.getParameter("photoAddForm:image").getBytes());
 
         service.create(PhotoAddModel.modelToEntityMapper().apply(photo));
-        System.out.println(photo);
         //photo.setImage(image.getInputStream().readAllBytes());
         conversation.end();
         return "/photo/photo_list.xhtml?faces-redirect=true";

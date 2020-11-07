@@ -1,8 +1,6 @@
 package org.example.photo.dto;
 
 import lombok.*;
-import org.example.camera.entity.Brand;
-import org.example.camera.entity.Camera;
 import org.example.photo.entity.Photo;
 
 import java.util.function.BiFunction;

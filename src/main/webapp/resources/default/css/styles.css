@@ -1,10 +1,10 @@
 body {
-    color:#565656;
+    color:black;
     margin:0;
 }
 a, a h1{
     text-decoration:none;
-    color:#565656;
+    color:black;
 }
 .main-section{
     margin-top:75px !important;

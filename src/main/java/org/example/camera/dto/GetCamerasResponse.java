@@ -2,7 +2,6 @@ package org.example.camera.dto;
 
 import lombok.*;
 import org.example.camera.entity.Brand;
-import org.example.camera.entity.Camera;
 
 import java.util.Collection;
 import java.util.List;

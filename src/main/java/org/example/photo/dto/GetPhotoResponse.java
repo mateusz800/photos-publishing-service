@@ -1,13 +1,9 @@
 package org.example.photo.dto;
 
 import lombok.*;
-import org.example.camera.entity.Brand;
-import org.example.camera.entity.Camera;
 import org.example.photo.entity.Photo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.function.Function;
 
 @Getter
