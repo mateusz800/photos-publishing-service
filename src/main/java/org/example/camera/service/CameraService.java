@@ -3,6 +3,7 @@ package org.example.camera.service;
 import lombok.NoArgsConstructor;
 import org.example.camera.entity.Camera;
 import org.example.camera.repository.CameraRepository;
+import org.example.photo.repository.PhotoRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,6 +27,7 @@ public class CameraService {
     @Transactional
     public void create(Camera camera) {
         repository.create(camera);
+
     }
 
     public List<Camera> findAll() {

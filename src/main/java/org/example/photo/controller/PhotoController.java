@@ -71,6 +71,8 @@ public class PhotoController {
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
         }
+
+
         service.create(photo);
         return Response.status(Response.Status.NO_CONTENT).build();
     }

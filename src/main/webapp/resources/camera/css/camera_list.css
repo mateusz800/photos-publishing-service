@@ -5,6 +5,7 @@
     border-bottom:1px solid #565656;
     border-left:1px solid #565656;
     padding:1px 5px;
+    text-align:center;
 }
 .data-table td:first-of-type{
     border-left:none;

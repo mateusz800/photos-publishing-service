@@ -32,11 +32,11 @@ public class Photo implements Serializable {
     private byte[] image;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name ="author")
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name ="camera")
     private Camera camera;
 }

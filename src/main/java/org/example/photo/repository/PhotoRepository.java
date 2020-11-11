@@ -7,6 +7,7 @@ import org.example.repository.Repository;
 import org.example.serialization.CloningUtility;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Dependent
+@RequestScoped
 public class PhotoRepository implements Repository<Photo, Long> {
     @PersistenceContext
     private EntityManager entityManager;

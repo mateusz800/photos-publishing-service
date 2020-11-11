@@ -10,7 +10,7 @@ a, a h1{
     margin-top:75px !important;
     margin-bottom:100px !important;
     min-height:calc(100vh - 275px);
-
+    font-size:22px;
 }
 .main-section, header div{
     width:100%;

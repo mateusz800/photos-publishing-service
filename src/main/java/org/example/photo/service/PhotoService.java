@@ -1,6 +1,7 @@
 package org.example.photo.service;
 
 import lombok.NoArgsConstructor;
+import org.example.camera.repository.CameraRepository;
 import org.example.photo.entity.Photo;
 import org.example.photo.repository.PhotoRepository;
 
@@ -14,10 +15,12 @@ import java.util.Optional;
 @NoArgsConstructor
 public class PhotoService {
     private PhotoRepository repository;
+    private CameraRepository cameraRepository;
 
     @Inject
-    public PhotoService(PhotoRepository repository){
+    public PhotoService(PhotoRepository repository, CameraRepository cameraRepository) {
         this.repository = repository;
+        this.cameraRepository = cameraRepository;
     }
 
     public Optional<Photo> find(Long id) {
@@ -27,13 +30,14 @@ public class PhotoService {
     @Transactional
     public void create(Photo photo) {
         repository.create(photo);
+        cameraRepository.find(photo.getCamera().getId()).ifPresent(user -> user.getPhotos().add(photo));
     }
 
     public List<Photo> findAll() {
         return repository.findAll();
     }
 
-    public List<Photo> findUserPhotos(Long userId){
+    public List<Photo> findUserPhotos(Long userId) {
         return repository.findUserPhotos(userId);
     }
 
@@ -44,7 +48,11 @@ public class PhotoService {
 
     @Transactional
     public void delete(Long id) {
+        Photo photo = repository.find(id).orElseThrow();
+        photo.getAuthor().getPhotos().remove(photo);
+        photo.getCamera().getPhotos().remove(photo);
         repository.delete(id);
+
     }
 
     public List<Photo> findCameraPhotos(Long id) {

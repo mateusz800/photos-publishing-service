@@ -2,10 +2,12 @@ package org.example.user.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.example.photo.entity.Photo;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,4 +29,9 @@ public class User implements Serializable {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] avatar;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Photo> photos;
+
+
 }
