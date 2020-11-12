@@ -28,7 +28,7 @@ public class Photo implements Serializable {
 
 
     @Lob
-    @Basic(fetch = FetchType.LAZY)
+    @Basic()
     private byte[] image;
 
 
